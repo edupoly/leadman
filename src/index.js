@@ -3,11 +3,52 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import '../node_modules/bootstrap/dist/js/bootstrap.min'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import "./index.css";
+import Dashboard from './Components/Dashboard';
+import LeadSearch from './Components/LeadSearch';
+import LeadEntryForm from './Components/LeadEntryForm';
+import Showleads from './Components/Showleads';
+import EditLeadEnteryForm from './Components/EditLeadEntryForm'
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App></App>,
+    children:[
+      {
+        path:'/',
+        element:<Dashboard></Dashboard>,
+        children:[
+          {
+            path:"/",
+            element:<LeadSearch></LeadSearch>
+          },
+          {
+            path:'/addLead',
+            element:<LeadEntryForm></LeadEntryForm>
+          },
+          {
+            path:'/showLeads',
+            element:<Showleads></Showleads>
+          },
+          {
+            path:'/editLead',
+            element:<EditLeadEnteryForm></EditLeadEnteryForm>
+          }
+        ]
+      }
+    ]
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
